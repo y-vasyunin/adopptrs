@@ -34,23 +34,23 @@ epochs = 20
 resume = 0
 
 for model in ['unet', 'segnet']:
-	for multi in [False, True]:
-		name = '{}'.format(('multi' if multi else '') + model)
+    for multi in [False, True]:
+        name = '{}'.format(('multi' if multi else '') + model)
 
-		slurm = HEADER.format(
-			name=name,
-			time=time
-		)
+        slurm = HEADER.format(
+            name=name,
+            time=time
+        )
 
-		for fold in range(5):
-			slurm += JOB.format(
-				name=name,
-				model=model,
-				multi=('-multitask' if multi else ''),
-				epochs=epochs,
-				resume=resume,
-				fold=fold
-			) + '\n'
+        for fold in range(5):
+            slurm += JOB.format(
+                name=name,
+                model=model,
+                multi=('-multitask' if multi else ''),
+                epochs=epochs,
+                resume=resume,
+                fold=fold
+            ) + '\n'
 
-		with open(name + '.sh', 'w') as f:
-			f.write(slurm)
+        with open(name + '.sh', 'w') as f:
+            f.write(slurm)

@@ -1374,16 +1374,16 @@ labels = ['U-Net', 'Multi-Task U-Net', 'SegNet', 'Multi-Task SegNet']
 fig, axs = plt.subplots(2, 2, figsize=(8, 8))
 
 for i, ax in enumerate(axs.flat):
-	for j, arr in enumerate(detection[i]):
-		arr = np.array(arr)
+    for j, arr in enumerate(detection[i]):
+        arr = np.array(arr)
 
-		ax.plot(arr[:, 4], arr[:, 3], '.-', label='{}'.format(j))
+        ax.plot(arr[:, 4], arr[:, 3], '.-', label='{}'.format(j))
 
 for ax, title in zip(axs.flat, labels):
-	ax.grid()
-	ax.set_title(title)
-	ax.set(xlabel='Recall', ylabel='Precision')
-	ax.label_outer()
+    ax.grid()
+    ax.set_title(title)
+    ax.set(xlabel='Recall', ylabel='Precision')
+    ax.label_outer()
 
 axs.flat[1].legend(title='Fold')
 
@@ -1395,21 +1395,21 @@ plt.close()
 fig, axs = plt.subplots(2, 2, figsize=(8, 8))
 
 for i, ax in enumerate(axs.flat):
-	for j, arr in enumerate(detection[i]):
-		arr = np.array(arr)
+    for j, arr in enumerate(detection[i]):
+        arr = np.array(arr)
 
-		ax.plot(arr[:, 3], '.-', label='{}'.format(j))
+        ax.plot(arr[:, 3], '.-', label='{}'.format(j))
 
 for ax, title in zip(axs.flat, labels):
-	ax.grid()
-	ax.set_title(title)
-	ax.set(xlabel='Threshold', ylabel='Precision')
-	ax.set_xticks(np.arange(len(thresholds)))
-	ax.set_xticklabels([
-		t if (i % 2) == 0 else None
-		for i, t in enumerate(thresholds)
-	], rotation=90)
-	ax.label_outer()
+    ax.grid()
+    ax.set_title(title)
+    ax.set(xlabel='Threshold', ylabel='Precision')
+    ax.set_xticks(np.arange(len(thresholds)))
+    ax.set_xticklabels([
+        t if (i % 2) == 0 else None
+        for i, t in enumerate(thresholds)
+    ], rotation=90)
+    ax.label_outer()
 
 axs.flat[1].legend(title='Fold')
 
@@ -1421,21 +1421,21 @@ plt.close()
 fig, axs = plt.subplots(2, 2, figsize=(8, 8))
 
 for i, ax in enumerate(axs.flat):
-	for j, arr in enumerate(detection[i]):
-		arr = np.array(arr)
+    for j, arr in enumerate(detection[i]):
+        arr = np.array(arr)
 
-		ax.plot(arr[:, 4], '.-', label='{}'.format(j))
+        ax.plot(arr[:, 4], '.-', label='{}'.format(j))
 
 for ax, title in zip(axs.flat, labels):
-	ax.grid()
-	ax.set_title(title)
-	ax.set(xlabel='Threshold', ylabel='Recall')
-	ax.set_xticks(np.arange(len(thresholds)))
-	ax.set_xticklabels([
-		t if (i % 2) == 0 else None
-		for i, t in enumerate(thresholds)
-	], rotation=90)
-	ax.label_outer()
+    ax.grid()
+    ax.set_title(title)
+    ax.set(xlabel='Threshold', ylabel='Recall')
+    ax.set_xticks(np.arange(len(thresholds)))
+    ax.set_xticklabels([
+        t if (i % 2) == 0 else None
+        for i, t in enumerate(thresholds)
+    ], rotation=90)
+    ax.label_outer()
 
 axs.flat[1].legend(title='Fold')
 
@@ -1447,22 +1447,22 @@ plt.close()
 fig, axs = plt.subplots(2, 2, figsize=(8, 8))
 
 for i, ax in enumerate(axs.flat):
-	for j, arr in enumerate(detection[i]):
-		arr = np.array(arr)
+    for j, arr in enumerate(detection[i]):
+        arr = np.array(arr)
 
-		fscore = 2 * (arr[:, 4] * arr[:, 3]) / (arr[:, 4] + arr[:, 3])
-		ax.plot(fscore, '.-', label='{}'.format(j))
+        fscore = 2 * (arr[:, 4] * arr[:, 3]) / (arr[:, 4] + arr[:, 3])
+        ax.plot(fscore, '.-', label='{}'.format(j))
 
 for ax, title in zip(axs.flat, labels):
-	ax.grid()
-	ax.set_title(title)
-	ax.set(xlabel='Threshold', ylabel='F-Score')
-	ax.set_xticks(np.arange(len(thresholds)))
-	ax.set_xticklabels([
-		t if (i % 2) == 0 else None
-		for i, t in enumerate(thresholds)
-	], rotation=90)
-	ax.label_outer()
+    ax.grid()
+    ax.set_title(title)
+    ax.set(xlabel='Threshold', ylabel='F-Score')
+    ax.set_xticks(np.arange(len(thresholds)))
+    ax.set_xticklabels([
+        t if (i % 2) == 0 else None
+        for i, t in enumerate(thresholds)
+    ], rotation=90)
+    ax.label_outer()
 
 axs.flat[1].legend(title='Fold')
 
@@ -1475,16 +1475,16 @@ plt.close()
 fig, axs = plt.subplots(2, 2, figsize=(8, 8))
 
 for i, ax in enumerate(axs.flat):
-	for j, arr in enumerate(segmentation[i]):
-		arr = np.array(arr)
+    for j, arr in enumerate(segmentation[i]):
+        arr = np.array(arr)
 
-		ax.plot(arr[:, 4], arr[:, 3], '.-', label='{}'.format(j))
+        ax.plot(arr[:, 4], arr[:, 3], '.-', label='{}'.format(j))
 
 for ax, title in zip(axs.flat, labels):
-	ax.grid()
-	ax.set_title(title)
-	ax.set(xlabel='Recall', ylabel='Precision')
-	ax.label_outer()
+    ax.grid()
+    ax.set_title(title)
+    ax.set(xlabel='Recall', ylabel='Precision')
+    ax.label_outer()
 
 axs.flat[1].legend(title='Fold')
 
@@ -1496,21 +1496,21 @@ plt.close()
 fig, axs = plt.subplots(2, 2, figsize=(8, 8))
 
 for i, ax in enumerate(axs.flat):
-	for j, arr in enumerate(segmentation[i]):
-		arr = np.array(arr)
+    for j, arr in enumerate(segmentation[i]):
+        arr = np.array(arr)
 
-		ax.plot(arr[:, 3], '.-', label='{}'.format(j))
+        ax.plot(arr[:, 3], '.-', label='{}'.format(j))
 
 for ax, title in zip(axs.flat, labels):
-	ax.grid()
-	ax.set_title(title)
-	ax.set(xlabel='Threshold', ylabel='Precision')
-	ax.set_xticks(np.arange(len(thresholds)))
-	ax.set_xticklabels([
-		t if (i % 2) == 0 else None
-		for i, t in enumerate(thresholds)
-	], rotation=90)
-	ax.label_outer()
+    ax.grid()
+    ax.set_title(title)
+    ax.set(xlabel='Threshold', ylabel='Precision')
+    ax.set_xticks(np.arange(len(thresholds)))
+    ax.set_xticklabels([
+        t if (i % 2) == 0 else None
+        for i, t in enumerate(thresholds)
+    ], rotation=90)
+    ax.label_outer()
 
 axs.flat[1].legend(title='Fold')
 
@@ -1522,21 +1522,21 @@ plt.close()
 fig, axs = plt.subplots(2, 2, figsize=(8, 8))
 
 for i, ax in enumerate(axs.flat):
-	for j, arr in enumerate(segmentation[i]):
-		arr = np.array(arr)
+    for j, arr in enumerate(segmentation[i]):
+        arr = np.array(arr)
 
-		ax.plot(arr[:, 4], '.-', label='{}'.format(j))
+        ax.plot(arr[:, 4], '.-', label='{}'.format(j))
 
 for ax, title in zip(axs.flat, labels):
-	ax.grid()
-	ax.set_title(title)
-	ax.set(xlabel='Threshold', ylabel='Recall')
-	ax.set_xticks(np.arange(len(thresholds)))
-	ax.set_xticklabels([
-		t if (i % 2) == 0 else None
-		for i, t in enumerate(thresholds)
-	], rotation=90)
-	ax.label_outer()
+    ax.grid()
+    ax.set_title(title)
+    ax.set(xlabel='Threshold', ylabel='Recall')
+    ax.set_xticks(np.arange(len(thresholds)))
+    ax.set_xticklabels([
+        t if (i % 2) == 0 else None
+        for i, t in enumerate(thresholds)
+    ], rotation=90)
+    ax.label_outer()
 
 axs.flat[1].legend(title='Fold')
 
@@ -1548,22 +1548,22 @@ plt.close()
 fig, axs = plt.subplots(2, 2, figsize=(8, 8))
 
 for i, ax in enumerate(axs.flat):
-	for j, arr in enumerate(segmentation[i]):
-		arr = np.array(arr)
+    for j, arr in enumerate(segmentation[i]):
+        arr = np.array(arr)
 
-		fscore = 2 * (arr[:, 4] * arr[:, 3]) / (arr[:, 4] + arr[:, 3])
-		ax.plot(fscore, '.-', label='{}'.format(j))
+        fscore = 2 * (arr[:, 4] * arr[:, 3]) / (arr[:, 4] + arr[:, 3])
+        ax.plot(fscore, '.-', label='{}'.format(j))
 
 for ax, title in zip(axs.flat, labels):
-	ax.grid()
-	ax.set_title(title)
-	ax.set(xlabel='Threshold', ylabel='F-Score')
-	ax.set_xticks(np.arange(len(thresholds)))
-	ax.set_xticklabels([
-		t if (i % 2) == 0 else None
-		for i, t in enumerate(thresholds)
-	], rotation=90)
-	ax.label_outer()
+    ax.grid()
+    ax.set_title(title)
+    ax.set(xlabel='Threshold', ylabel='F-Score')
+    ax.set_xticks(np.arange(len(thresholds)))
+    ax.set_xticklabels([
+        t if (i % 2) == 0 else None
+        for i, t in enumerate(thresholds)
+    ], rotation=90)
+    ax.label_outer()
 
 axs.flat[1].legend(title='Fold')
 
@@ -1575,24 +1575,24 @@ plt.close()
 fig, axs = plt.subplots(2, 2, figsize=(8, 8))
 
 for i, ax in enumerate(axs.flat):
-	for j, arr in enumerate(segmentation[i]):
-		arr = np.array(arr)
+    for j, arr in enumerate(segmentation[i]):
+        arr = np.array(arr)
 
-		mre = 1 - np.divide(arr[:, 4], arr[:, 3], out=np.ones_like(arr[:, 4]), where=arr[:, 3] != 0)
+        mre = 1 - np.divide(arr[:, 4], arr[:, 3], out=np.ones_like(arr[:, 4]), where=arr[:, 3] != 0)
 
-		ax.plot(mre, '.-', label='{}'.format(j))
+        ax.plot(mre, '.-', label='{}'.format(j))
 
 for ax, title in zip(axs.flat, labels):
-	ax.grid()
-	ax.set_title(title)
-	ax.set(xlabel='Threshold', ylabel='MRE')
-	ax.set_xticks(np.arange(len(thresholds)))
-	ax.set_xticklabels([
-		t if (i % 2) == 0 else None
-		for i, t in enumerate(thresholds)
-	], rotation=90)
-	ax.set_ylim([-0.5, 0.5])
-	ax.label_outer()
+    ax.grid()
+    ax.set_title(title)
+    ax.set(xlabel='Threshold', ylabel='MRE')
+    ax.set_xticks(np.arange(len(thresholds)))
+    ax.set_xticklabels([
+        t if (i % 2) == 0 else None
+        for i, t in enumerate(thresholds)
+    ], rotation=90)
+    ax.set_ylim([-0.5, 0.5])
+    ax.label_outer()
 
 axs.flat[2].legend(title='Fold')
 
@@ -1611,35 +1611,35 @@ segmentation_mean_ap = np.zeros(4)
 segmentation_std_ap = np.zeros(4)
 
 for i, label in enumerate(labels):
-	temp = np.zeros(5)
+    temp = np.zeros(5)
 
-	for j, arr in enumerate(detection[i]):
-		arr = np.array(arr)
+    for j, arr in enumerate(detection[i]):
+        arr = np.array(arr)
 
-		temp[j] = np.trapz(arr[:, 4], arr[:, 3])
+        temp[j] = np.trapz(arr[:, 4], arr[:, 3])
 
-	detection_mean_ap[i] = np.mean(temp)
-	detection_std_ap[i] = np.std(temp)
+    detection_mean_ap[i] = np.mean(temp)
+    detection_std_ap[i] = np.std(temp)
 
-	for j, arr in enumerate(segmentation[i]):
-		arr = np.array(arr)
+    for j, arr in enumerate(segmentation[i]):
+        arr = np.array(arr)
 
-		temp[j] = np.trapz(arr[:, 4], arr[:, 3])
+        temp[j] = np.trapz(arr[:, 4], arr[:, 3])
 
-	segmentation_mean_ap[i] = np.mean(temp)
-	segmentation_std_ap[i] = np.std(temp)
+    segmentation_mean_ap[i] = np.mean(temp)
+    segmentation_std_ap[i] = np.std(temp)
 
 trans1 = Affine2D().translate(-0.1, 0.0) + ax.transData
 trans2 = Affine2D().translate(+0.1, 0.0) + ax.transData
 
 plt.errorbar(
-	['U-Net', 'Multi-Task\nU-Net', 'SegNet', 'Multi-Task\nSegNet'],
-	detection_mean_ap, yerr=detection_std_ap, capsize=5, marker='o', linestyle='none', label='Detection', transform=trans1
+    ['U-Net', 'Multi-Task\nU-Net', 'SegNet', 'Multi-Task\nSegNet'],
+    detection_mean_ap, yerr=detection_std_ap, capsize=5, marker='o', linestyle='none', label='Detection', transform=trans1
 )
 
 plt.errorbar(
-	['U-Net', 'Multi-Task\nU-Net', 'SegNet', 'Multi-Task\nSegNet'],
-	segmentation_mean_ap, yerr=segmentation_std_ap, capsize=5, marker='o', linestyle='none', label='Segmentation', transform=trans2
+    ['U-Net', 'Multi-Task\nU-Net', 'SegNet', 'Multi-Task\nSegNet'],
+    segmentation_mean_ap, yerr=segmentation_std_ap, capsize=5, marker='o', linestyle='none', label='Segmentation', transform=trans2
 )
 
 plt.ylabel('Average Precision')
@@ -1662,27 +1662,27 @@ fine_segmentation_mean_ap = np.zeros(2)
 fine_segmentation_std_ap = np.zeros(2)
 
 for i, ax in enumerate(axs.flat):
-	temp = np.zeros(5)
+    temp = np.zeros(5)
 
-	for j, arr in enumerate(fine_detection[i % 2] if i // 2 == 0 else fine_segmentation[i % 2]):
-		arr = np.array(arr)
+    for j, arr in enumerate(fine_detection[i % 2] if i // 2 == 0 else fine_segmentation[i % 2]):
+        arr = np.array(arr)
 
-		ax.plot(arr[:, 4], arr[:, 3], '.-', label='{}'.format(j))
+        ax.plot(arr[:, 4], arr[:, 3], '.-', label='{}'.format(j))
 
-		temp[j] = np.trapz(arr[:, 4], arr[:, 3])
+        temp[j] = np.trapz(arr[:, 4], arr[:, 3])
 
-	if i // 2 == 0:
-		fine_detection_mean_ap[i % 2] = np.mean(temp)
-		fine_detection_std_ap[i % 2] = np.std(temp)
-	else:
-		fine_segmentation_mean_ap[i % 2] = np.mean(temp)
-		fine_segmentation_std_ap[i % 2] = np.std(temp)
+    if i // 2 == 0:
+        fine_detection_mean_ap[i % 2] = np.mean(temp)
+        fine_detection_std_ap[i % 2] = np.std(temp)
+    else:
+        fine_segmentation_mean_ap[i % 2] = np.mean(temp)
+        fine_segmentation_std_ap[i % 2] = np.std(temp)
 
 for ax, title in zip(axs.flat, ['Detection before', 'Detection after', 'Segmentation before', 'Segmentation after']):
-	ax.grid()
-	ax.set_title(title)
-	ax.set(xlabel='Recall', ylabel='Precision')
-	ax.label_outer()
+    ax.grid()
+    ax.set_title(title)
+    ax.set(xlabel='Recall', ylabel='Precision')
+    ax.label_outer()
 
 axs.flat[2].legend(title='Fold')
 

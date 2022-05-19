@@ -21,6 +21,6 @@ os.makedirs(args.destination, exist_ok=True)
 via = VIA.load(args.input)
 
 for imagename in via:
-	row, col = parse(imagename)
-	img = Image.open(wm.get_tile(row, col))
-	img.save(os.path.join(args.destination, imagename))
+    row, col = parse(imagename)
+    img = Image.open(wm.get_tile(row, col))
+    img.save(os.path.join(args.destination, imagename))

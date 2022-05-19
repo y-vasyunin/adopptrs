@@ -18,116 +18,116 @@ from scipy.ndimage.morphology import distance_transform_edt as dt
 ###########
 
 class MultiTaskLoss(nn.Module):
-	"""
-	Distance loss and Dice loss sum
+    """
+    Distance loss and Dice loss sum
 
-	References
-	----------
-	Multi-Task Learning for Segmentation of Building Footprints with Deep Neural Networks
-	(Bischke et al., 2019)
-	https://arxiv.org/abs/1709.05932
-	"""
+    References
+    ----------
+    Multi-Task Learning for Segmentation of Building Footprints with Deep Neural Networks
+    (Bischke et al., 2019)
+    https://arxiv.org/abs/1709.05932
+    """
 
-	def __init__(self, smooth=1., R=5):
-		super().__init__()
+    def __init__(self, smooth=1., R=5):
+        super().__init__()
 
-		self.dice = DiceLoss(smooth=smooth)
-		self.cross = nn.CrossEntropyLoss()
+        self.dice = DiceLoss(smooth=smooth)
+        self.cross = nn.CrossEntropyLoss()
 
-		self.R = R
+        self.R = R
 
-	def forward(self, outputs, targets):
-		dists = self.transform(targets)
-		return self.dice(outputs[0], targets) + self.cross(outputs[1], dists)
+    def forward(self, outputs, targets):
+        dists = self.transform(targets)
+        return self.dice(outputs[0], targets) + self.cross(outputs[1], dists)
 
-	def transform(self, targets):
-		'''Transforms targets into distances.'''
-		dists = targets.cpu().squeeze(dim=1).numpy()
+    def transform(self, targets):
+        '''Transforms targets into distances.'''
+        dists = targets.cpu().squeeze(dim=1).numpy()
 
-		for i in range(len(dists)):
-			dists[i, ...] = dt(dists[i, ...]) - dt(1 - dists[i, ...])
+        for i in range(len(dists)):
+            dists[i, ...] = dt(dists[i, ...]) - dt(1 - dists[i, ...])
 
-		return torch.clamp(
-			torch.tensor(dists, dtype=int, device=targets.device),
-			min=-self.R,
-			max=self.R
-		) + self.R
+        return torch.clamp(
+            torch.tensor(dists, dtype=int, device=targets.device),
+            min=-self.R,
+            max=self.R
+        ) + self.R
 
 
 class DiceLoss(nn.Module):
-	'''Dice Loss (F-score, ...)'''
+    '''Dice Loss (F-score, ...)'''
 
-	def __init__(self, smooth=1.):
-		super().__init__()
+    def __init__(self, smooth=1.):
+        super().__init__()
 
-		self.smooth = smooth
+        self.smooth = smooth
 
-	def forward(self, outputs, targets):
-		inter = (outputs * targets).sum()
-		dice = (2. * inter + self.smooth) / (outputs.sum() + targets.sum() + self.smooth)
+    def forward(self, outputs, targets):
+        inter = (outputs * targets).sum()
+        dice = (2. * inter + self.smooth) / (outputs.sum() + targets.sum() + self.smooth)
 
-		return 1. - dice
+        return 1. - dice
 
 
 class IOULoss(nn.Module):
-	'''Intersection Over Union Loss'''
+    '''Intersection Over Union Loss'''
 
-	def __init__(self, smooth=1.):
-		super().__init__()
+    def __init__(self, smooth=1.):
+        super().__init__()
 
-		self.smooth = smooth
+        self.smooth = smooth
 
-	def forward(self, outputs, targets):
-		inter = (outputs * targets).sum()
-		union = outputs.sum() + targets.sum() - inter
-		iou = (inter + self.smooth) / (union + self.smooth)
+    def forward(self, outputs, targets):
+        inter = (outputs * targets).sum()
+        union = outputs.sum() + targets.sum() - inter
+        iou = (inter + self.smooth) / (union + self.smooth)
 
-		return 1. - iou
+        return 1. - iou
 
 
 class TP(nn.Module):
-	'''True Positive'''
+    '''True Positive'''
 
-	def __init__(self, threshold=0.5):
-		super().__init__()
+    def __init__(self, threshold=0.5):
+        super().__init__()
 
-		self.threshold = threshold
+        self.threshold = threshold
 
-	def forward(self, outputs, targets):
-		return ((outputs > self.threshold) * targets).sum()
+    def forward(self, outputs, targets):
+        return ((outputs > self.threshold) * targets).sum()
 
 
 class TN(nn.Module):
-	'''True Negative'''
+    '''True Negative'''
 
-	def __init__(self, threshold=0.5):
-		super().__init__()
+    def __init__(self, threshold=0.5):
+        super().__init__()
 
-		self.threshold = threshold
+        self.threshold = threshold
 
-	def forward(self, outputs, targets):
-		return ((outputs < self.threshold) * (1 - targets)).sum()
+    def forward(self, outputs, targets):
+        return ((outputs < self.threshold) * (1 - targets)).sum()
 
 
 class FP(nn.Module):
-	'''False Positive'''
+    '''False Positive'''
 
-	def __init__(self, threshold=0.5):
-		super().__init__()
+    def __init__(self, threshold=0.5):
+        super().__init__()
 
-		self.threshold = threshold
+        self.threshold = threshold
 
-	def forward(self, outputs, targets):
-		return ((outputs > self.threshold) * (1 - targets)).sum()
+    def forward(self, outputs, targets):
+        return ((outputs > self.threshold) * (1 - targets)).sum()
 
 
 class FN(nn.Module):
-	'''False Negative'''
+    '''False Negative'''
 
-	def __init__(self, threshold=0.5):
-		super().__init__()
+    def __init__(self, threshold=0.5):
+        super().__init__()
 
-		self.threshold = threshold
+        self.threshold = threshold
 
-	def forward(self, outputs, targets):
-		return ((outputs < self.threshold) * targets).sum()
+    def forward(self, outputs, targets):
+        return ((outputs < self.threshold) * targets).sum()

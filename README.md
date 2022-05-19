@@ -18,7 +18,7 @@ The [PyTorch](https://pytorch.org/) library has been used to implement and train
 
 ### Dependencies
 
-If you wish to run the scripts or the [Jupyter](https://jupyter.org/) notebook(s), you will need to install several `Python` packages including `jupyter`, `torch`, `torchvision`, `opencv`, `matplotlib` and their dependencies.
+If you wish to run the scripts or the [Jupyter](https://jupyter.org/) notebook(s), you will need to install several `Python` packages including `jupyter`, `torch`, `torchvision`, `opencv`, `matplotlib` and their dependencies. Currently, PyTorch on Windows only supports Python 3.7-3.9.
 
 To do so safely, one should create a new environment :
 
@@ -30,7 +30,7 @@ pip3 install -r requirements.txt -y
 
 or with the `conda` package manager
 
-```bash
+```Powershell
 conda env create -f environment.yml
 conda activate adopptrs
 ```
@@ -93,25 +93,27 @@ For training our models, we used the [Distributed Solar PV Array Location and Ex
 
 This dataset contains the geospatial coordinates and border vertices for over `19 000` solar panels across `601` high resolution images from four cities in California.
 
-```bash
-wget "https://ndownloader.figshare.com/articles/3385780/versions/3" -O polygons.zip
-wget "https://ndownloader.figshare.com/articles/3385828/versions/1" -O Fresno.zip
-wget "https://ndownloader.figshare.com/articles/3385789/versions/1" -O Modesto.zip
-wget "https://ndownloader.figshare.com/articles/3385807/versions/1" -O Oxnard.zip
-wget "https://ndownloader.figshare.com/articles/3385804/versions/1" -O Stockton.zip
-mkdir -p resources/california/
-unzip polygons.zip -d resources/california/
-unzip Fresno.zip -d resources/california/
-unzip Modesto.zip -d resources/california/
-unzip Oxnard.zip -d resources/california/
-unzip Stockton.zip -d resources/california/
-rm *.zip resources/california/*.xml # optionally
+In Powershell:
+```Powershell
+Invoke-WebRequest -Uri "https://figshare.com/ndownloader/articles/3385780/versions/4" -OutFile polygons.zip
+Invoke-WebRequest -Uri "https://figshare.com/ndownloader/articles/3385828/versions/1" -OutFile Fresno.zip
+Invoke-WebRequest -Uri "https://figshare.com/ndownloader/articles/3385789/versions/1" -OutFile Modesto.zip
+Invoke-WebRequest -Uri "https://figshare.com/ndownloader/articles/3385807/versions/1" -OutFile Oxnard.zip
+Invoke-WebRequest -Uri "https://figshare.com/ndownloader/articles/3385804/versions/1" -OutFile Stockton.zip
+New-Item -Name "./resources/california" -ItemType "directory"
+Expand-Archive polygons.zip -DestinationPath resources\california\
+Expand-Archive Fresno.zip -DestinationPath resources\california\
+Expand-Archive Modesto.zip -DestinationPath resources\california\
+Expand-Archive Oxnard.zip -DestinationPath resources\california\
+Expand-Archive Stockton.zip -DestinationPath resources\california\
+Remove-Item *.zip  # optionally
+Remove-Item resources\california\*.xml  # optionally
 ```
 
 Afterwards, the file `SolarArrayPolygons.json` has to be converted to the [VGG Image Annotator][via] format.
 
-```bash
-python3 python/dataset.py --output products/json/california.json --path resources/california/
+```Powershell
+python python\dataset.py --output products\json\california.geojson --path "resources\california\"
 ```
 
 [walonmap]: https://geoportail.wallonie.be/walonmap

@@ -23,62 +23,62 @@ import os
 #############
 
 def load(filename):
-	with open(filename, 'r') as f:
-		return deformat(json.load(f))
+    with open(filename, 'r') as f:
+        return deformat(json.load(f))
 
 
 def dump(via, filename, path='./', indent=None):
-	if os.path.dirname(filename):
-		os.makedirs(os.path.dirname(filename), exist_ok=True)
-	with open(filename, 'w') as f:
-		json.dump(format(via, path), f, indent=indent)
+    if os.path.dirname(filename):
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+    with open(filename, 'w') as f:
+        json.dump(format(via, path), f, indent=indent)
 
 
 def deformat(via):
-	'''Deformats VIA dictionnary'''
-	deformated = {}
+    '''Deformats VIA dictionnary'''
+    deformated = {}
 
-	for file in via.values():
-		polygons = []
+    for file in via.values():
+        polygons = []
 
-		for region in file['regions']:
-			polygons.append(list(zip(
-				region['shape_attributes']['all_points_x'],
-				region['shape_attributes']['all_points_y']
-			)))
+        for region in file['regions']:
+            polygons.append(list(zip(
+                region['shape_attributes']['all_points_x'],
+                region['shape_attributes']['all_points_y']
+            )))
 
-		deformated[file['filename']] = polygons
+        deformated[file['filename']] = polygons
 
-	return deformated
+    return deformated
 
 
 def format(via, path='./'):
-	'''Format VIA dictionnary'''
-	formated = {}
+    '''Format VIA dictionnary'''
+    formated = {}
 
-	for basename, polygons in via.items():
-		filename = os.path.join(path, basename)
+    for basename, polygons in via.items():
+        filename = os.path.join(path, basename)
 
-		if os.path.exists(filename):
-			size = os.stat(filename).st_size
-		else:
-			size = 0
+        if os.path.exists(filename):
+            size = os.stat(filename).st_size
+        else:
+            size = 0
 
-		formated[basename + str(size)] = {
-			'filename': basename,
-			'size': size,
-			'file_attributes': {},
-			'regions': list(map(
-				lambda polygon: {
-					'region_attributes':{},
-					'shape_attributes': {
-						'all_points_x': list(map(lambda x: x[0], polygon)),
-						'all_points_y': list(map(lambda x: x[1], polygon)),
-						'name': 'polygon'
-					}
-				},
-				polygons
-			))
-		}
+        formated[basename + str(size)] = {
+            'filename': basename,
+            'size': size,
+            'file_attributes': {},
+            'regions': list(map(
+                lambda polygon: {
+                    'region_attributes':{},
+                    'shape_attributes': {
+                        'all_points_x': list(map(lambda x: x[0], polygon)),
+                        'all_points_y': list(map(lambda x: x[1], polygon)),
+                        'name': 'polygon'
+                    }
+                },
+                polygons
+            ))
+        }
 
-	return formated
+    return formated

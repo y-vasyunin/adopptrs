@@ -2,18 +2,20 @@ name: adopptrs
 channels:
   - pytorch
   - defaults
+  - conda-forge
 dependencies:
-  - jupyter=1.0.0
-  - numpy=1.18.1
-  - pip=20.0.2
-  - python=3.8.2
-  - pytorch=1.4.0
-  - scipy=1.4.1
+  - jupyter
+  - numpy
+  - pip
+  - python=3.9
+  - pytorch
+  - cudatoolkit=11.3
+  - scipy
   - pip:
-    - matplotlib==3.2.1
-    - opencv-python==4.2.0.32
-    - owslib==0.19.2
-    - pandas==1.0.3
-    - pillow==7.0.0
-    - torchsummary==1.5.1
-    - torchvision==0.5.0
+    - matplotlib
+    - opencv-python
+    - owslib
+    - pandas
+    - pillow
+    - torchsummary
+    - torchvision
